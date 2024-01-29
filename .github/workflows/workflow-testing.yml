@@ -2,15 +2,24 @@ name: workflow-testing
 on:
   workflow_dispatch:
 jobs:
-  deploy:
+  initial-stage:
     runs-on: ubuntu-latest
-    environment:
-      name: staging
-      url: ${{ steps.deployment.outputs.url }}
     steps:
-      - name: Previous steps
-        run: echo "Previous steps here"
-      - name: Await Approval
-        # This step will pause until the environment approval is granted
-      - name: Next steps
-        run: echo "Next steps here"
+      - name: startup steps
+        run: |
+          echo "starting up!"
+  approval-stage:
+    runs-on: ubuntu-latest
+    environment: 'staging'
+    needs:
+      - initial-stage
+    steps:
+      - run: echo "Approved to Prod"
+  final-stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: startup steps
+        run: |
+          echo "End!"
+    needs:
+      - approval-stage
