@@ -2,9 +2,15 @@ name: workflow-testing
 on:
   workflow_dispatch:
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ steps.deployment.outputs.url }}
     steps:
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Previous steps
+        run: echo "Previous steps here"
+      - name: Await Approval
+        # This step will pause until the environment approval is granted
+      - name: Next steps
+        run: echo "Next steps here"
