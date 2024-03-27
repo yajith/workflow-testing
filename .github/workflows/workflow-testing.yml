@@ -1,25 +1,11 @@
 name: workflow-testing
 on:
-  workflow_dispatch:
+  issue_comment:
+    types: [created, edited]
+
 jobs:
-  initial-stage:
+  test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: startup steps
-        run: |
-          echo "starting up!"
-  approval-stage:
-    runs-on: ubuntu-latest
-    environment: 'staging'
-    needs:
-      - initial-stage
-    steps:
-      - run: echo "Approved to Prod"
-  final-stage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: startup steps
-        run: |
-          echo "End!"
-    needs:
-      - approval-stage
+      - name: Echo a test message
+        run: echo "Workflow triggered by comment!"
