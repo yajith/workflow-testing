@@ -1,9 +1,7 @@
 name: workflow-testing
 on:
-  pull_request_review:
-    types:
-      - submitted
-      - edited
+  pull_request_review_comment:
+    types: [created, edited]
   issue_comment:
     types: [created, edited]
 
