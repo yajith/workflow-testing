@@ -1,7 +1,7 @@
 name: workflow-testing
 on:
   pull_request_review:
-    types: [created, edited]
+    types: [submitted, edited]
 
 jobs:
   test-job:
