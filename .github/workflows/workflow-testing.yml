@@ -6,7 +6,7 @@ on:
 jobs:
   test-job:
     runs-on: ubuntu-latest
-    if: (github.event.pull_request && github.event.review.body == '/ci')
+    if: (github.event.pull_request && github.event.review.body == '/ci') || (github.event_name == 'workflow_dispatch')
     steps:
       - name: Echo a test message
         run: echo "Workflow triggered by comment!"
