@@ -2,8 +2,6 @@ name: workflow-testing
 on:
   pull_request_review_comment:
     types: [created, edited]
-  issue_comment:
-    types: [created, edited]
 
 jobs:
   test-job:
