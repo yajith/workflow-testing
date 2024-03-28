@@ -2,13 +2,11 @@ name: workflow-testing
 on:
   pull_request_review_comment:
     types: [created, edited]
-  issue_comment:
-    types: [created, edited]
 
 jobs:
   test-job:
     runs-on: ubuntu-latest
-    if: (github.event.pull_request && github.event.comment.body == '/ci')
+    if: (github.event.pull_request && github.event.review.body == '/ci')
     steps:
       - name: Echo a test message
         run: echo "Workflow triggered by comment!"
