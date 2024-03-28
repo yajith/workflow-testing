@@ -7,6 +7,10 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     if: (github.event.pull_request && github.event.review.body == '/ci') || (github.event_name == 'workflow_dispatch')
+    strategy:
+      fail-fast: false
+      matrix:
+        orchestrator: ["standalone", "swarm", "kubernetes"]    
     steps:
       - name: Echo a test message
         run: echo "Workflow triggered by comment!"
